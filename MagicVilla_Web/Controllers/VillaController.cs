@@ -4,11 +4,10 @@ using MagicVilla_Web.Models.DTO;
 using MagicVilla_Web.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text.Json;
 
 namespace MagicVilla_Web.Controllers
 {
-    public class VillaController : Controller
+	public class VillaController : Controller
     {
         private readonly IVillaService _villaService;
         private readonly IMapper _mapper;
