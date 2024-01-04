@@ -1,12 +1,12 @@
 ﻿using MagicVilla_Ultility;
 using MagicVilla_Web.Models;
 using MagicVilla_Web.Services.IServices;
+using Newtonsoft.Json;
 using System.Text;
-using System.Text.Json;
 
 namespace MagicVilla_Web.Services
 {
-    public class BaseService : IBaseService
+	public class BaseService : IBaseService
     {
         public APIResponse responseModel { get; set; }
         public IHttpClientFactory httpClient { get; set; }
@@ -29,7 +29,7 @@ namespace MagicVilla_Web.Services
                 if (apiRequest.Data != null)
                 {
                     requestMessage.Content = new StringContent(
-                        JsonSerializer.Serialize(apiRequest.Data),
+						JsonConvert.SerializeObject(apiRequest.Data),
                         Encoding.UTF8,
                         "application/json"
                     );
@@ -54,7 +54,7 @@ namespace MagicVilla_Web.Services
                 responseMessage = await client.SendAsync(requestMessage);
 
                 var apiContent = await responseMessage.Content.ReadAsStringAsync();
-                var apiResponse = JsonSerializer.Deserialize<T>(apiContent);
+                var apiResponse = JsonConvert.DeserializeObject<T>(apiContent);
 
                 return apiResponse;
             }
@@ -65,8 +65,8 @@ namespace MagicVilla_Web.Services
                     ErrorMessages = new List<string> { ex.Message },
                     IsSuccess = false
                 };
-                var res = JsonSerializer.Serialize(dto);
-                var apiResponse = JsonSerializer.Deserialize<T>(res);
+                var res = JsonConvert.SerializeObject(dto);
+                var apiResponse = JsonConvert.DeserializeObject<T>(res);
                 return apiResponse;
             }
         }

@@ -20,11 +20,12 @@ namespace MagicVilla_Web.Services
 
         public Task<T> GetAllAsync<T>()
         {
-            return SendAsync<T>(new APIRequest()
-            {
-                ApiType = SD.ApiType.GET,
-                Url = villaUrl + "/api/villaAPI/",
-            });
+            var result = SendAsync<T>(new APIRequest()
+			{
+				ApiType = SD.ApiType.GET,
+				Url = villaUrl + "/api/VillaAPI/",
+			});
+            return result;
         }
 
         public Task<T> GetAsync<T>(int id)

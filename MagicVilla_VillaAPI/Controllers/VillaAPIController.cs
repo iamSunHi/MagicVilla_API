@@ -166,7 +166,6 @@ namespace MagicVilla_VillaAPI.Controllers
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
-                var villa = await _villaRepo.GetAsync(v => v.Id == id);
                 Villa model = _mapper.Map<Villa>(updateDTO);
 
                 await _villaRepo.UpdateAsync(model);
