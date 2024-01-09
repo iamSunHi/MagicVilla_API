@@ -27,7 +27,8 @@ namespace MagicVilla_VillaAPI.Controllers
 
         [HttpGet]
         [Authorize(Roles = "admin")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+		[ResponseCache(CacheProfileName = "Duration30")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetVillasAsync()
         {
             try
@@ -83,6 +84,7 @@ namespace MagicVilla_VillaAPI.Controllers
 
         [HttpPost]
 		[Authorize(Roles = "admin")]
+		[ResponseCache(CacheProfileName = "Duration30")]
 		[ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
